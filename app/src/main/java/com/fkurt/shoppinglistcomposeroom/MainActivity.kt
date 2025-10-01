@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,13 +34,6 @@ class MainActivity : AppCompatActivity() {
         vt = Database.databaseAccess(this)!!
         pdao = vt.getShoppingListDao()
 
-        // DB sıfırlama: tüm kayıtları sil
-        lifecycleScope.launch {
-            val allProducts = pdao.getAllProducts()
-            for (p in allProducts) {
-                pdao.personDelete(p)
-            }
-        }
 
         // Adapter’i tek satırla başlat
         adapter = Adapter(mutableListOf("Satır 1"))
@@ -94,6 +88,7 @@ class MainActivity : AppCompatActivity() {
                     for (name in productList) {
                         if (name.isNotBlank()) {
                             dao.insert(Products(name = name))
+                            Toast.makeText(this@MainActivity, "Veriler kaydedildi", Toast.LENGTH_SHORT).show()
                         }
                     }
                     Log.d("DB_SAVE", "Veriler kaydedildi: $productList")
