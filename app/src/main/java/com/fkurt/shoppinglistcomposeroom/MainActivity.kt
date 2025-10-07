@@ -18,7 +18,6 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: Adapter
-    private val itemList = mutableListOf<String>("Satır 1") // Başlangıç satırı
 
     private lateinit var vt:Database
     private lateinit var pdao:ShoppingDao
@@ -85,16 +84,19 @@ class MainActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 val dao = Database.databaseAccess(this@MainActivity)?.getShoppingListDao()
                 if (dao != null) {
+                    // 🔹 Önce tüm eski kayıtları sil
+                    dao.deleteAllProducts()
+
+                    // 🔹 Sonra yeni listeyi kaydet
                     for (name in productList) {
                         if (name.isNotBlank()) {
                             dao.insert(Products(name = name))
-                            Toast.makeText(this@MainActivity, "Veriler kaydedildi", Toast.LENGTH_SHORT).show()
                         }
                     }
-                    Log.d("DB_SAVE", "Veriler kaydedildi: $productList")
+                    Toast.makeText(this@MainActivity, "Veriler güncellendi", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
     }
-
 }

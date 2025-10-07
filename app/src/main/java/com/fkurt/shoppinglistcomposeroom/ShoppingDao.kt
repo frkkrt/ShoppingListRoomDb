@@ -10,11 +10,8 @@ interface ShoppingDao {
     @Insert
     suspend fun insert(product: Products)
 
-    @Update
-    suspend fun productUpdate(products: Products)
-
-    @Delete
-    suspend fun personDelete(products: Products)
+    @Query("DELETE FROM Products")
+    suspend fun deleteAllProducts()
 
 
 }
