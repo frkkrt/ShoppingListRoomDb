@@ -9,9 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.core.widget.addTextChangedListener
-import androidx.recyclerview.widget.RecyclerView
-
+import androidx.core.widget.addTextChangedListener/*
 class Adapter(private val products:MutableList<String>)
     :RecyclerView.Adapter<Adapter.MyViewHolder>(){
 
@@ -90,3 +88,4 @@ class Adapter(private val products:MutableList<String>)
 
     fun getProducts(): List<String> = products
 }
+ */
